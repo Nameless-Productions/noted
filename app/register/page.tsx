@@ -1,15 +1,15 @@
 "use client"
 
 import React from 'react'
-import loginForm from "@/lib/loginForm";
+import registerForm from "@/lib/registerForm";
 import Link from 'next/link';
 
 export default function LoginPage() {
   return (<>
     <div className='mx-auto items-center text-center max-w-sm p-5 border-4 rounded-3xl'>
-        <p className='text-3xl font-bold'>Login</p>
+        <p className='text-3xl font-bold'>Register</p>
         <br />
-        <form action={loginForm}>
+        <form action={registerForm}>
 
             <label htmlFor="username">Username:</label>
             <br />
@@ -21,10 +21,10 @@ export default function LoginPage() {
             <br />
             <input type="password" id='password' name='password' className='border-2 rounded-xl active:rounded-xl p-1' required />
             <br />
-            <input type="submit" value="Login" className='mt-4 border-2 rounded-full p-2 bg-gray-300 transition-all duration-300 hover:bg-gray-400 cursor-pointer w-30' />
+            <input type="submit" value="Register" className='mt-4 border-2 rounded-full p-2 bg-gray-300 transition-all duration-300 hover:bg-gray-400 cursor-pointer w-30' />
         
             <br />
-            <p>Don't have an account? Register <Link href="/register" className='text-blue-400 underline'>here</Link></p>
+            <p>Already have an account? Log in <Link href="/login" className='text-blue-400 underline'>here</Link></p>
         </form>
     </div>
   </>)

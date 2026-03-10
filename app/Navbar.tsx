@@ -17,7 +17,6 @@ export default function Navbar() {
           </summary>
 
           <div className='absolute right-0 mt-2 w-44 rounded-md border border-gray-300 bg-white shadow-md z-50'>
-            <Link href="/me" className='block px-4 py-2 hover:bg-gray-100'>My profile</Link>
             <Link href="/settings" className='block px-4 py-2 hover:bg-gray-100'>Settings</Link>
             <Link href="/logout" className='block px-4 py-2 hover:bg-gray-100'>Log out</Link>
           </div>

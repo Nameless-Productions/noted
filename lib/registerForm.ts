@@ -9,10 +9,10 @@ export default async function registerForm(formData: FormData) {
     try {
         const username = formData.get("username");
         const password = formData.get("password");
-        if(!username || !password) return redirect("/login");
+        if(!username || !password) return redirect("/register");
 
         const response = await client.query("SELECT * FROM users WHERE username = $1", [username]);
-        if(response.rowCount == 1) return redirect("/login");
+        if(response.rowCount == 1) return redirect("/register?error=exists");
         
 
         const passwHash = await bcrypt.hash(password as string, 10);
@@ -24,7 +24,7 @@ export default async function registerForm(formData: FormData) {
     }
     catch(err) {
         console.error(err);
-        return redirect("/login");
+        return redirect("/register?error=other");
     }
     finally {
         client.release();

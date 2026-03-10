@@ -36,11 +36,11 @@ export default async function loginForm(formData: FormData){
                 redirect("/");
             }
             else{
-                redirect("/login");
+                redirect("/login?error=invalid");
             }
         }
         else{
-            redirect("/login");
+            redirect("/login?error=invalid");
         }
     } finally {
         client.release();

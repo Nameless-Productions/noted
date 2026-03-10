@@ -1,10 +1,16 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import loginForm from "@/lib/loginForm";
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 export default function LoginPage() {
+
+  const searchParams = useSearchParams();
+  const [error, setError] = useState(searchParams.get("error"));
+  
+
   return (<>
     <div className='mx-auto items-center text-center max-w-sm p-5 border-4 rounded-3xl'>
         <p className='text-3xl font-bold'>Login</p>
@@ -22,7 +28,11 @@ export default function LoginPage() {
             <input type="password" id='password' name='password' className='border-2 rounded-xl active:rounded-xl p-1' required />
             <br />
             <input type="submit" value="Login" className='mt-4 border-2 rounded-full p-2 bg-gray-300 transition-all duration-300 hover:bg-gray-400 cursor-pointer w-30' />
-        
+
+
+            {error == "invalid" && <p className='text-red-600'>Invalid Credentials</p>}
+            {error == "other" && <p className='text-yellow-500'>An error occured</p>}
+
             <br />
             <p>Don't have an account? Register <Link href="/register" className='text-blue-400 underline'>here</Link></p>
         </form>

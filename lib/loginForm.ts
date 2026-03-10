@@ -5,13 +5,8 @@ import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createToken } from "./jws";
+import { pool } from "./db";
 
-const pool = new Pool({
-    connectionString: process.env.CONN_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
-});
 
 export default async function loginForm(formData: FormData){
     const client = await pool.connect();

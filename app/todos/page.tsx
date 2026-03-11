@@ -1,6 +1,7 @@
 "use client";
 
 import { createTodoForm } from '@/lib/createTodo';
+import deleteTodo from '@/lib/deleteTodo';
 import React, { useEffect, useState } from 'react'
 
 type Todo = {
@@ -28,7 +29,10 @@ export default function TodosPage() {
   return (<>
     <ul className='list-[square] list-inside'>
         {todos?.map((todo) => (
-            <li key={todo.id} className='text-lg'>{todo.todo}</li>
+            <li key={todo.id} className='text-lg cursor-pointer' title='Click to delete' onClick={async () => {
+                await deleteTodo(todo.id);
+                location.href = "/todos"
+            }}>{todo.todo}</li>
         ))}
     </ul>
 

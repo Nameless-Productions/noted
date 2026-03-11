@@ -6,7 +6,6 @@ export default async function Proxy(req: NextRequest) {
 
     if (
         pathname.startsWith("/_next") ||
-        pathname.startsWith("/api") ||
         pathname === "/favicon.ico" ||
         /\.[^/]+$/.test(pathname)
     ) {

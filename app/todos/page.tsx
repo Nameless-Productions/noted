@@ -5,6 +5,7 @@ import { verifyToken } from '@/lib/jws';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import CreateTodoForm from './CreateTodoForm';
+import TodoList from './TodoList';
 
 type Todo = {
     todo: string,
@@ -23,14 +24,7 @@ export default async function TodosPage() {
 
 
   return (<>
-    <ul className='list-[square] list-inside'>
-        {todos?.map((todo) => (
-            <li key={todo.id} className='text-lg cursor-pointer' title='Click to delete' onClick={async () => {
-                await deleteTodo(todo.id);
-                location.href = "/todos"
-            }}>{todo.todo}</li>
-        ))}
-    </ul>
+    <TodoList todos={todos} />
 
     <br />
 

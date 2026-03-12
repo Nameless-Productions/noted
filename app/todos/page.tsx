@@ -1,29 +1,25 @@
-"use client";
-
 import { createTodoForm } from '@/lib/createTodo';
 import deleteTodo from '@/lib/deleteTodo';
-import React, { useEffect, useState } from 'react'
+import getTodos from '@/lib/getTodos';
+import { verifyToken } from '@/lib/jws';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+import CreateTodoForm from './CreateTodoForm';
 
 type Todo = {
     todo: string,
     id: number
 }
 
-export default function TodosPage() {
+export default async function TodosPage() {
 
-    const [todos, setTodos] = useState<Todo[]>();
+    const cookieStore = await cookies();
+    const token = cookieStore.get("auth-token")?.value;
+    const res: any = verifyToken(token!);
+    if(!res) return redirect("/logout");
+    const uid = res.userId;
+    const todos = await getTodos(uid);
 
-    async function updateTodos() {
-        const res = await fetch("/api/todos");
-        if(res.ok){
-            const json = await res.json();
-            setTodos(json.todos);
-        }
-    }
-
-    useEffect(() => {
-        updateTodos();
-    }, []);
 
 
   return (<>
@@ -38,11 +34,6 @@ export default function TodosPage() {
 
     <br />
 
-    <form action={createTodoForm}>
-        <label htmlFor="todo">Todo:</label>
-        <br />
-        <input type="text" name='todo' id='todo' className='border rounded-lg active:rounded-lg p-0.5' required />
-        <input type="submit" value="Create Todo" className='ml-1 border-2 p-0.5 rounded-lg bg-green-200 cursor-pointer' />
-    </form>
+    <CreateTodoForm />
   </>)
 }

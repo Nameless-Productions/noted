@@ -10,6 +10,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <main className='m-3'>
           {children}
         </main>
+        <p>&copy; {new Date().getFullYear()} Nameless Productions. Litcensed under the MIT license</p>
       </body>
     </html>
   )

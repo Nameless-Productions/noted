@@ -1,10 +1,17 @@
 import { pool } from "./db";
 
+type Note = {
+    id: number,
+    title: string,
+    content: string,
+    ownerId: number
+}
+
 export default async function getNotes(ownerId: number) {
     const client = await pool.connect();
     try{
-        const res = await client.query("SELECT * FROM notes WHERE ownerId = $1", [ownerId]);
-        const notes = res.rows.map((note) => ({
+        const res: any = await client.query("SELECT * FROM notes WHERE ownerId = $1", [ownerId]);
+        const notes: Note[] = res.rows.map((note: any) => ({
             id: note.id,
             tile: atob(note.tile),
             content: atob(note.content),

@@ -5,7 +5,7 @@ export default async function createNote(ownerId: number) {
     try{
         const title = btoa("Note title");
         const content = btoa("Note content")
-        await client.query("INSERT INTO notes (title, content, ownerId) VALUES ($2, $3, $1)", [ownerId, title, content]);
+        await client.query("INSERT INTO notes (title, content, ownerid) VALUES ($2, $3, $1)", [ownerId, title, content]);
     }
     catch(err){
         console.warn("error while creating note: ", err);

@@ -1,6 +1,16 @@
 import React from 'react';
 import './globals.css';
 import Navbar from './Navbar';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Noted",
+  description: "Take notes line never! Noted lets you take notes, make todos as easily as a few clicks. Just log in, write the note and you are done!",
+  openGraph: {
+    title: "Noted",
+    description: "Take notes line never! Noted lets you take notes, make todos as easily as a few clicks. Just log in, write the note and you are done!"
+  }
+}
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (

@@ -5,10 +5,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Noted",
-  description: "Take notes like never! Noted lets you take notes, make todos as easily as a few clicks. Just log in, write the note and you are done!",
+  description: "Noted is a note-taking app built for people who just want to write. No cluttered menus, no endless features you'll never use. Just a clean space to get your thoughts down. Your thoughts, captured.",
+  icons: {
+    icon: "/logo.svg"
+  },
   openGraph: {
     title: "Noted",
-    description: "Take notes like never! Noted lets you take notes, make todos as easily as a few clicks. Just log in, write the note and you are done!"
+    description: "Noted is a note-taking app built for people who just want to write. No cluttered menus, no endless features you'll never use. Just a clean space to get your thoughts down. Your thoughts, captured.",
+    images: ["https://noted.thenamelessdev.com/logo.svg"]
   }
 }
 

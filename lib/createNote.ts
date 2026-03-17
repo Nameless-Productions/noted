@@ -6,8 +6,9 @@ import { cookies } from "next/headers";
 import { verifyToken } from "./jws";
 
 export default async function createNote(ownerId: number, title: string): Promise<number | undefined> {
-    const client = await pool.connect();
+    let client;
     try{
+        client = await pool.connect();
         const encodedTitle = btoa(title);
         const content = btoa("Note content")
         const res = await client.query("INSERT INTO notes (title, content, ownerid) VALUES ($2, $3, $1) RETURNING id", [ownerId, encodedTitle, content]);
@@ -17,7 +18,7 @@ export default async function createNote(ownerId: number, title: string): Promis
         console.warn("error while creating note: ", err);
     }
     finally{
-        client.release();
+        client?.release();
     }
 }
 

@@ -1,6 +1,5 @@
 "use server"
 
-import { Pool } from "pg";
 import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -9,8 +8,9 @@ import { pool } from "./db";
 
 
 export default async function loginForm(formData: FormData){
-    const client = await pool.connect();
+    let client;
     try {
+        client = await pool.connect();
         const username = formData.get("username");
         const password = formData.get("password");
         if(!username || !password) return;
@@ -43,6 +43,6 @@ export default async function loginForm(formData: FormData){
             redirect("/login?error=invalid");
         }
     } finally {
-        client.release();
+        client?.release();
     }
 }

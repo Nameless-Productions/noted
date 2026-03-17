@@ -17,8 +17,9 @@ type Note = {
 };
 
 export default async function getNotes(ownerId: number) {
-    const client = await pool.connect();
+    let client;
     try {
+        client = await pool.connect();
         const res = await client.query<NoteRow>("SELECT * FROM notes WHERE ownerid = $1", [ownerId]);
         const notes: Note[] = res.rows.map((note) => ({
             id: note.id,
@@ -30,6 +31,6 @@ export default async function getNotes(ownerId: number) {
     } catch (err) {
         console.warn("Error while getting notes: ", err);
     } finally {
-        client.release();
+        client?.release();
     }
 }

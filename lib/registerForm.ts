@@ -5,8 +5,9 @@ import { pool } from "./db";
 import bcrypt from "bcrypt";
 
 export default async function registerForm(formData: FormData) {
-    const client = await pool.connect();
+    let client;
     try {
+        client = await pool.connect();
         const username = formData.get("username");
         const password = formData.get("password");
         if(!username || !password) return redirect("/register");
@@ -27,6 +28,6 @@ export default async function registerForm(formData: FormData) {
         return redirect("/register?error=other");
     }
     finally {
-        client.release();
+        client?.release();
     }
 }

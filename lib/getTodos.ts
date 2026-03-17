@@ -14,8 +14,9 @@ type Todo = {
 };
 
 export default async function getTodos(ownerId: number): Promise<Todo[] | undefined> {
-    const client = await pool.connect();
+    let client;
     try {
+        client = await pool.connect();
         const res = await client.query<TodoRow>("SELECT * FROM todos WHERE owner_id = $1", [ownerId]);
 
         const todos = res.rows.map((todo) => ({
@@ -27,6 +28,6 @@ export default async function getTodos(ownerId: number): Promise<Todo[] | undefi
     } catch (err) {
         console.warn("Err while getting todos: ", err);
     } finally {
-        client.release();
+        client?.release();
     }
 }

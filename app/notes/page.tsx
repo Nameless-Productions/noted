@@ -4,6 +4,7 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation';
 import React from 'react'
 import NoteList from './NoteList';
+import CreateNoteForm from './CreateNoteForm';
 
 export default async function NotesPage() {
     const cookieStore = await cookies();
@@ -14,5 +15,7 @@ export default async function NotesPage() {
     const notes = await getNotes(res.userId);
   return (<>
     <NoteList notes={notes} />
+    <br />
+    <CreateNoteForm />
   </>)
 }

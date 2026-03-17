@@ -1,3 +1,5 @@
+"use server"
+
 import { pool } from "./db";
 
 export default async function editNote(id: number, newContent: string) {
